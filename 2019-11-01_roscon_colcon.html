@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>colcon - Universal Build Tool</title>
+
+    <meta name="description" content="Description of colcon at ROSCon 2019">
+    <meta name="author" content="Dirk Thomas">
+
+    <link rel="stylesheet" href="css/bootstrap-4.3.1.css">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/white.css">
+
+    <link rel="stylesheet" href="css/openrobotics.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <div class="openrobotics-signature">
+          <svg id="openrobotics-logo" height="1.8em" width="1.8em" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <image id="openrobotics-logo-image" x="0" y="0" height="100%" width="100%" xlink:href="image/osrf-logo.svg"/>
+            <animateTransform id="openrobotics-logo-clockwise" xlink:href="#openrobotics-logo-image" attributeName="transform" attributeType="XML"
+              type="rotate" from="0 27 27" to="360 27 27" dur="1.0s" calcMode="spline" keySplines="0.5 0 0.5 1" keyTimes="0;1" begin="indefinite" repeatCount="0" fill="freeze"/>
+            <animateTransform id="openrobotics-logo-counterclockwise" xlink:href="#openrobotics-logo-image" attributeName="transform" attributeType="XML"
+              type="rotate" from="360 27 27" to="0 27 27" dur="1.0s" calcMode="spline" keySplines="0.5 0 0.5 1" keyTimes="0;1" begin="indefinite" repeatCount="0" fill="freeze"/>
+            <animate id="openrobotics-logo-flash" attributeType="CSS" attributeName="opacity"
+              dur="0.7s" values="1; 0.25; 1" keyTimes="0; 0.25; 1" repeatCount="0" />
+          </svg>
+          <svg id="openrobotics-lettering" height="1.6em" width="32%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <image x="-95" y="-5" height="100%" width="100%" xlink:href="image/openrobotics-lettering.svg"/>
+          </svg>
+        </div>
+
+        <section>
+          <h1>colcon</h1>
+          <img src="image/colcon.svg" width="20%" style="text-align: left; margin-top: -45px; margin-bottom: -10px" alt=""/>
+          <h3>Universal Build Tool</h3>
+          <p>
+            <small>
+              Nov. 1st 2019, Dirk Thomas<br/>
+              ROSCon 2019, Macau, China
+            </small>
+          </p>
+        </section>
+
+        <section>
+          <h2 style="text-align: left;">Questions...</h2>
+          <img src="image/qrcode_2019-11-01_roscon_colcon.svg" width="20%" style="text-align: left;" alt=""/>
+        </section>
+      </div>
+    </div>
+
+    <script src="js/reveal.js"></script>
+
+    <script>
+      // More info https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        history: true,
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+          { src: 'plugin/markdown/marked.js' },
+          { src: 'plugin/markdown/markdown.js' },
+          { src: 'plugin/notes/notes.js', async: true },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+        ]
+      });
+      var previous_index_h = 0;
+      var previous_index_v = 0;
+      Reveal.addEventListener( 'slidechanged', function(event) {
+        if (event.previousSlide) {
+          if (event.indexh > previous_index_h) {
+            document.getElementById('openrobotics-logo-clockwise').beginElement();
+          } else if (event.indexh < previous_index_h) {
+            document.getElementById('openrobotics-logo-counterclockwise').beginElement();
+          } else if (event.indexv > previous_index_v) {
+            document.getElementById('openrobotics-logo-clockwise').beginElement();
+          } else if (event.indexv < previous_index_v) {
+            document.getElementById('openrobotics-logo-counterclockwise').beginElement();
+          }
+          var animation = Reveal.getCurrentSlide().getAttribute('data-animation');
+          if (animation) {
+            function startAnimation(element) {
+              element.beginElement();
+            }
+            setTimeout(startAnimation, 1500, document.getElementById(animation));
+          }
+        }
+        previous_index_h = event.indexh;
+        previous_index_v = event.indexv;
+      });
+      Reveal.addEventListener('fragmentshown', function(event) {
+        document.getElementById('openrobotics-logo-flash').beginElement();
+      });
+      Reveal.addEventListener('fragmenthidden', function(event) {
+        document.getElementById('openrobotics-logo-flash').beginElement();
+      });
+    </script>
+  </body>
+</html>
