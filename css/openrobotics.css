@@ -131,3 +131,14 @@ svg text {
     stroke-dashoffset: -100;
   }
 }
+
+.reveal table.buildtools th {
+  font-weight: normal;
+  text-align: center;
+}
+.reveal table.buildtools th, .reveal table.buildtools td {
+  border-bottom: 0;
+}
+.reveal table.buildtools td img {
+  margin: 0;
+}
